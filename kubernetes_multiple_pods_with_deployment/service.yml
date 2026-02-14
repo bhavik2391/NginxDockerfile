@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: deployment-apache-nginx-service
+  name: bvk-apache-nginx-service
 spec:
+  type: ClusterIP          # Change to NodePort or LoadBalancer if needed
   selector:
-    app: myapp        # Matches both pods
+    app: bvk-app         # Must match nginx deployment label
   ports:
   - protocol: TCP
-    port: 80          # Service Port
-    targetPort: 80    # Pod Port
-  type: ClusterIP
+    port: 80
+    targetPort: 80

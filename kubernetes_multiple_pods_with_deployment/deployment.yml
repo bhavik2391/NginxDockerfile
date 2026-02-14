@@ -1,23 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-apache-deployment
+  name: bvk-nginx-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: myapp
+      app: bvk-app
   template:
     metadata:
       labels:
-        app: myapp
+        app: bvk-app
     spec:
       containers:
-      - name: bhavik-deployment-nginx
-        image: nginx
+      - name: bvk-nginx-container
+        image: nginx:latest
         ports:
         - containerPort: 80
-      - name: bhavik-deployment-apache
-        image: httpd
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bvk-apache-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bvk-app
+  template:
+    metadata:
+      labels:
+        app: bvk-app
+    spec:
+      containers:
+      - name: bvk-apache-container
+        image: httpd:latest
         ports:
         - containerPort: 80
+        command: ["httpd-foreground"]
