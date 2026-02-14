@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-apache-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: bhavik-deployment-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+      - name: bhavik-deployment-apache
+        image: httpd
+        ports:
+        - containerPort: 80
