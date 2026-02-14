@@ -4,7 +4,7 @@ metadata:
   name: deployment-apache-nginx-service-loadbalancer
 spec:
   selector:
-    app: myapp        # Matches both pods
+    app: bvk-app        # Matches both pods
   ports:
   - protocol: TCP
     port: 80          # Service Port
