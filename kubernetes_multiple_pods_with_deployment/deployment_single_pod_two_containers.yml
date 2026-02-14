@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-apache-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: multiweb
+  template:
+    metadata:
+      labels:
+        app: multiweb
+    spec:
+      containers:
+      - name: bhavik-deployment-nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+      - name: bhavik-deployment-apache
+        image: httpd:latest
+        ports:
+        - containerPort: 80
+        command: ["httpd-foreground"]
