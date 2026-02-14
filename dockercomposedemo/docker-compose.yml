@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./dockercomposedemo
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: bhavikdb
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mynetwork
+
+volumes:
+  dbdata:
+
+networks:
+  mynetwork:
